@@ -38,7 +38,7 @@ else:
 
 ## 学習用画像ファイルへのパス
 # root_dir = str(Path('kill_me_baby_datasets').resolve())
-root_dir = str(Path('DAGM2007/Normal').resolve())  # DAGM画像用
+root_dir = str(Path('../DAGM2007/Normal').resolve())  # DAGM画像用
 
 ## kill_me_baby_datasets/.DS_Storeファイルが存在する場合、削除する(エラーで落ちるので)
 DS_Store_isExists = os.path.exists(os.path.join(root_dir, '.DS_Store'))
