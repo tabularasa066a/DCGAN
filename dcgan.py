@@ -29,12 +29,12 @@ tf.random.set_seed(0)
 # config = tf.ConfigProto(gpu_options=tf.GPUOptions(allow_growth=True))
 # session = tf.Session(config=config)
 # tensorflow_backend.set_session(session)
-physical_devices = tf.config.experimental.list_physical_devices('GPU')
-if len(physical_devices) > 0:
-    tf.config.experimental.set_memory_growth(physical_devices[0], True)
-    print('memory growth:', tf.config.experimental.get_memory_growth(physical_devices[0]))
-else:
-    print("Not enough GPU hardware devices available")
+# physical_devices = tf.config.experimental.list_physical_devices('GPU')
+# if len(physical_devices) > 0:
+#     tf.config.experimental.set_memory_growth(physical_devices[0], True)
+#     print('memory growth:', tf.config.experimental.get_memory_growth(physical_devices[0]))
+# else:
+#     print("Not enough GPU hardware devices available")
 
 ## 学習用画像ファイルへのパス
 # root_dir = str(Path('kill_me_baby_datasets').resolve())
