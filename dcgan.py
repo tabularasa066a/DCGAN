@@ -46,7 +46,7 @@ if DS_Store_isExists:
     os.remove(os.path.join(root_dir, '.DS_Store'))
 
 IMAGE_CHANNELS = 3  # 画像のチャンネル数(1: グレースケール, 3: color)
-IMAGE_SIZE = 256  # 正方形画像の辺長さ
+IMAGE_SIZE = 128  # 正方形画像の辺長さ
 IMAGE_SIZE_HALF = int(IMAGE_SIZE / 2)
 IMAGE_SIZE_QUARTED = int(IMAGE_SIZE / 4)
 IMAGE_SIZE_DOBLE = int(IMAGE_SIZE * 2)
@@ -203,7 +203,8 @@ class DCGAN():
             gen_imgs = np.squeeze(gen_imgs)  # グレー画像用の配列の形にreshape
 
         # 0-1 rescale
-        gen_imgs = 0.5 * gen_imgs + 0.5
+        # gen_imgs = 0.5 * gen_imgs + 0.5
+        gen_imgs = gen_imgs * 127.5 + 127.5  # [-1, 1] -> [0, 255], こっち？
 
         fig, axs = plt.subplots(r, c)
         cnt = 0
@@ -285,6 +286,6 @@ if __name__ == '__main__':
     dcgan = DCGAN()
     r, c = 5, 5
     check_noise = np.random.uniform(-1, 1, (r * c, 100))
-    dcgan.train(iterations=200000, batch_size=IMAGE_SIZE_QUARTED, save_interval=1000,model_interval=5000, check_noise=check_noise, r=r,c=c)
-    # dcgan.train(iterations=10000, batch_size=32, save_interval=100,model_interval=500, check_noise=check_noise, r=r,c=c)
+    # dcgan.train(iterations=200000, batch_size=IMAGE_SIZE_QUARTED, save_interval=1000,model_interval=5000, check_noise=check_noise, r=r,c=c)
+    dcgan.train(iterations=10000, batch_size=32, save_interval=100,model_interval=500, check_noise=check_noise, r=r,c=c)
 
