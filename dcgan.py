@@ -202,9 +202,9 @@ class DCGAN():
         if IMAGE_CHANNELS == 1:  # グレースケールのとき
             gen_imgs = np.squeeze(gen_imgs)  # グレー画像用の配列の形にreshape
 
-        # 0-1 rescale
-        # gen_imgs = 0.5 * gen_imgs + 0.5
-        gen_imgs = gen_imgs * 127.5 + 127.5  # [-1, 1] -> [0, 255], こっち？
+        # [-1, 1] -> [0, 1] denormilize
+        gen_imgs = 0.5 * gen_imgs + 0.5
+        # gen_imgs = gen_imgs * 127.5 + 127.5  # [-1, 1] -> [0, 255], こっち？
 
         fig, axs = plt.subplots(r, c)
         cnt = 0
@@ -267,7 +267,7 @@ class DCGAN():
 
         for i, vec in enumerate(vectors):
             gen_img = np.squeeze(self.generator.predict(vec), axis=0)
-            gen_img = (0.5 * gen_img + 0.5) * 255
+            gen_img = (0.5 * gen_img + 0.5) * 255  # [-1, 1] -> [0, 255]にdenormilize
             if IMAGE_CHANNELS == 1:
                 gen_img = np.squeeze(gen_img)  # グレー画像用の配列の形にreshape
                 interpolatedImage = gen_img
